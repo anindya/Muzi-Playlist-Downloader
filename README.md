@@ -5,7 +5,7 @@ A downloader for playlists on Muzi(Internal music player at IITR made by SDSLabs
 
 ####How to use?
 
-* Clone the repository 'git clone git@github.com:anindya/Muzi-Playlist-Downloader.git' or 'git clone https://github.com/anindya/Muzi-Playlist-Downloader.git'
+* Clone the repository `git clone git@github.com:anindya/Muzi-Playlist-Downloader.git` or `git clone https://github.com/anindya/Muzi-Playlist-Downloader.git`
 
 * Goto muzi_download_playlist.py
 
