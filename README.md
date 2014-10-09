@@ -1,30 +1,34 @@
 Muzi-Playlist-Downloader
-========================
+=========
+Muzi playlist downloader
 
-A downloader for playlists on Muzi(Internal music player at IITR made by SDSLabs)
+Version
+----
+1.0
 
-####How to use?
 
-* Clone the repository `git clone git@github.com:anindya/Muzi-Playlist-Downloader.git` or `git clone https://github.com/anindya/Muzi-Playlist-Downloader.git`
+Requirements
+--------------
+* Python 2.7.6
 
-* Goto muzi_download_playlist.py
+How to use
+--------------
 
-* Login to sdslabs.co.in/muzi
+```sh
+git clone git@github.com:nkman/Muzi-Playlist-Downloader.git
+cd "Muzi-Playlist-Downloader"
 
-* Open the playlist of songs you want to download
+<create user.json accoring to user.sample.json in ./config/>
 
-* Press F12 to open developer tools and go to Network
+run as:
+    ./download
+```
 
-* Find ?id=***** with /muzi/ajax/playlist/ written below it 
+License
+----
 
-* The ***** is your ID. Replace 1971 with this ID
+MIT
 
-* Now run this python file
 
-* All songs will be downloaded to the directory of python script
+**Free Software**
 
-####TO-DO
-
-* Add functionality to not download songs already downloaded
-
-* Check for songs that are not downloaded(eg. Call me Maybe)
