@@ -65,15 +65,20 @@ class Muzi:
         temp = temp_session.get(self.playlist_url)
         self.playlist = temp.text
 
+        # print self.playlist
+
         return self.playlist
 
-    def songs_extractor(self, id):
+    def songs_extractor(self, s_id):
 
         temp_session = self.hero
-        temp = temp_session.get(self.songs_in_playlist_url+str(id))
+        id_req = json.loads(self.playlist)['playlists'][int(s_id)]['pid']
+        
+        temp = temp_session.get(self.songs_in_playlist_url+id_req)
+
+        # print self.songs_in_playlist_url+str(s_id)
 
         self.songs = json.loads(temp.text)
-
         song_id = []
 
         for track in self.songs['tracks']:
@@ -81,9 +86,10 @@ class Muzi:
 
         self.id = song_id
 
-    def song_downloader(self):
+    def song_downloader(self, folder_name):
 
         temp_session = self.hero
+
         for song_id in self.id:
 
             temp = temp_session.get(self.track_url+str(song_id))
@@ -91,5 +97,5 @@ class Muzi:
 
             song_name = song_url.split('/')
 
-            print "Downloading %s\n" % song_name[len(song_name) - 1]
-            urllib.urlretrieve(self.song_url+song_url, song_name[len(song_name) - 1])
+            print "Downloading %s" % song_name[len(song_name) - 1]
+            urllib.urlretrieve(self.song_url+song_url, folder_name+"/"+song_name[len(song_name) - 1])

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys
+import sys, os
 import json
 
 import config
@@ -27,9 +27,15 @@ def main():
     write_playlist(playlist)
     num = raw_input()
 
+    folder_name = playlist['playlists'][int(num)]['name']
+    folder_name1 = folder_name.replace(' ', '\ ')
+
+    if not os.path.exists("./"+str(folder_name1)):
+        os.system("mkdir "+folder_name1)
+
     session.songs_extractor(num)
-    session.song_downloader()
-    
+    session.song_downloader(folder_name)
+
     session.logout()
 
 
