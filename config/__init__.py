@@ -1,10 +1,10 @@
 import os
 import json
 
-DB_PATH = os.path.join(os.path.dirname(__file__), 'user.json')
+USER_PATH = os.path.join(os.path.dirname(__file__), 'user.json')
 
 def config():
-    config_file = os.path.abspath(DB_PATH)
+    config_file = os.path.abspath(USER_PATH)
     
     with open(config_file, 'r') as f:
         config = f.read()
