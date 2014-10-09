@@ -14,7 +14,7 @@ def write_playlist(playlist):
     sys.stdout.write("Select a playlist to download !!\n")
     i = 0
     for play in playlist['playlists']:
-        sys.stdout.write(i+". ")
+        sys.stdout.write(str(i)+". ")
         sys.stdout.write(play['name']+'\n')
         i += 1
 
@@ -25,6 +25,13 @@ def main():
     playlist = json.loads(playlist)
 
     write_playlist(playlist)
-    raw_input(num)
+    num = raw_input()
 
+    session.songs_extractor(num)
+    session.song_downloader()
+    
     session.logout()
+
+
+if __name__ == '__main__':
+    main()

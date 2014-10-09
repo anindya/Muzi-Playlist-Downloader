@@ -1,6 +1,7 @@
 import requests as r
 import jsontree as j
 import json
+import urllib
 
 class Muzi:
 
@@ -8,11 +9,15 @@ class Muzi:
 
         self.username = config['username']
         self.password = config['password']
+
         self.home_url = "https://sdslabs.co.in/home/"
         self.login_url = "https://accounts.sdslabs.co.in/login"
         self.logout_url = "https://accounts.sdslabs.co.in/logout"
         self.playlist_url = "https://muzi.sdslabs.co.in/ajax/user/info.php?userid=me"
         self.check_login = "https://accounts.sdslabs.co.in/info"
+        self.songs_in_playlist_url = "https://muzi.sdslabs.co.in/ajax/playlist/?id=" #Attach id here.
+        self.track_url = "https://muzi.sdslabs.co.in/ajax/track/?id=" #Attach song id here
+        self.song_url = "https://music.sdslabs.co.in/"
 
     def login(self):
 
@@ -61,3 +66,30 @@ class Muzi:
         self.playlist = temp.text
 
         return self.playlist
+
+    def songs_extractor(self, id):
+
+        temp_session = self.hero
+        temp = temp_session.get(self.songs_in_playlist_url+str(id))
+
+        self.songs = json.loads(temp.text)
+
+        song_id = []
+
+        for track in self.songs['tracks']:
+            song_id.append(track['id'])
+
+        self.id = song_id
+
+    def song_downloader(self):
+
+        temp_session = self.hero
+        for song_id in self.id:
+
+            temp = temp_session.get(self.track_url+str(song_id))
+            song_url = json.loads(temp.text)['file']
+
+            song_name = song_url.split('/')
+
+            print "Downloading %s\n" % song_name[len(song_name) - 1]
+            urllib.urlretrieve(self.song_url+song_url, song_name[len(song_name) - 1])
